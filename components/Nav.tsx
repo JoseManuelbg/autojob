@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const enlaces = [
   { href: "/", label: "Candidaturas", icono: "📋" },
+  { href: "/ofertas", label: "Ofertas", icono: "📡" },
   { href: "/validar", label: "Validar oferta", icono: "🎯" },
   { href: "/cvs", label: "Mis CVs", icono: "📄" },
   { href: "/filtros", label: "Filtros", icono: "⚙️" },

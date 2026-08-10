@@ -19,7 +19,26 @@
       "Bash(curl -s -X DELETE http://localhost:3000/api/candidaturas/1)",
       "Bash(curl -s -X DELETE http://localhost:3000/api/cvs/1)",
       "Bash(curl -s -X PUT http://localhost:3000/api/filtros -H \"Content-Type: application/json\" -d '{\"palabras_clave\":\"\",\"palabras_excluidas\":\"\",\"salario_minimo\":null,\"ubicaciones\":\"\",\"modalidades\":\"\"}')",
-      "PowerShell(git add -A)"
+      "PowerShell(git add -A)",
+      "PowerShell(gh repo create autojob --private --source . --push)",
+      "Bash(curl -s -o /dev/null -w \"linkedin: %{http_code}\\\\n\" \"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=frontend&location=Espa%C3%B1a&start=0\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\)\")",
+      "Bash(curl -s -o /dev/null -w \"tecnoempleo-rss: %{http_code}\\\\n\" \"https://www.tecnoempleo.com/rss/rss.php\" -H \"User-Agent: Mozilla/5.0\")",
+      "Bash(curl -s \"https://www.tecnoempleo.com/rss/rss.php?te=frontend\" -H \"User-Agent: Mozilla/5.0\")",
+      "Bash(curl -s \"https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=frontend&location=Espa%C3%B1a&start=0\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\)\")",
+      "Bash(curl -s -L \"https://www.tecnoempleo.com/ofertas-trabajo/?te=frontend\" -H \"User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\)\" -o /tmp/tecno.html -w \"%{http_code}\")",
+      "Read(//tmp/**)",
+      "Bash(python -c ' *)",
+      "Bash(grep -o '<a href=\"https://www.tecnoempleo.com/[^\"]*\" class=\"font-weight-bold text-cyan-700\"[^>]*>[^<]*' /tmp/tecno.html | head -5; echo ===; grep -o 'class=\"fs-5 mb-2\"' /tmp/tecno.html | head -2; sed -n 's/.*<h3 class=\"fs-5 mb-2\">\\\\\\(.*\\\\\\)/\\\\1/p' /tmp/tecno.html | head -4)",
+      "Bash(awk '/rf-361515c0524b43c7ba43/{found=1} found{print; n++} n>60{exit}' /tmp/tecno.html)",
+      "Bash(curl -s -X PUT http://localhost:3000/api/ajustes -H \"Content-Type: application/json\" -d '{\"consulta\":\"desarrollador frontend\",\"pais\":\"es\"}')",
+      "Bash(curl -s -X PUT http://localhost:3000/api/filtros -H \"Content-Type: application/json\" -d '{\"palabras_clave\":\"react, javascript, frontend\",\"palabras_excluidas\":\"\",\"salario_minimo\":25000,\"ubicaciones\":\"Madrid, Sevilla\",\"modalidades\":\"remoto,hibrido\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/ofertas/buscar --max-time 60)",
+      "Bash(curl -s http://localhost:3000/api/ofertas)",
+      "Bash(node -e ' *)",
+      "PowerShell(git push)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   }
 }

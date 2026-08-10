@@ -42,6 +42,28 @@ export function getDb(): Database.Database {
       actualizado_en TEXT NOT NULL DEFAULT (datetime('now'))
     );
 
+    CREATE TABLE IF NOT EXISTS ofertas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      fuente TEXT NOT NULL,
+      id_externo TEXT NOT NULL,
+      titulo TEXT NOT NULL,
+      empresa TEXT NOT NULL DEFAULT '',
+      ubicacion TEXT NOT NULL DEFAULT '',
+      url TEXT NOT NULL,
+      descripcion TEXT NOT NULL DEFAULT '',
+      salario_texto TEXT NOT NULL DEFAULT '',
+      fecha_publicacion TEXT NOT NULL DEFAULT '',
+      puntuacion INTEGER,
+      estado TEXT NOT NULL DEFAULT 'nueva',
+      creado_en TEXT NOT NULL DEFAULT (datetime('now')),
+      UNIQUE (fuente, id_externo)
+    );
+
+    CREATE TABLE IF NOT EXISTS ajustes (
+      clave TEXT PRIMARY KEY,
+      valor TEXT NOT NULL DEFAULT ''
+    );
+
     CREATE TABLE IF NOT EXISTS filtros (
       id INTEGER PRIMARY KEY CHECK (id = 1),
       palabras_clave TEXT NOT NULL DEFAULT '',
