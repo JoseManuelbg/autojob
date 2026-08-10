@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AutoJob 🎯
 
-## Getting Started
+Aplicación web local para llevar el registro de tus candidaturas de empleo, gestionar tus versiones de CV y validar automáticamente si una oferta encaja con tus criterios — **100% gratuita y sin servicios externos**: todo se guarda y analiza en tu ordenador.
 
-First, run the development server:
+## Funcionalidades
+
+- **📋 Candidaturas** — registra cada oferta a la que aplicas con empresa, puesto, URL, salario, estado (guardada → enviada → entrevista → oferta / rechazada) y el CV que enviaste. Incluye estadísticas (total, enviadas, entrevistas, tasa de respuesta) y búsqueda/filtrado.
+- **📄 Mis CVs** — sube tus distintas versiones de CV (PDF/DOCX), etiquétalas y asígnalas a cada candidatura para saber siempre cuál enviaste.
+- **🎯 Validar oferta** — pega el texto de una oferta y el motor local la puntúa de 0 a 100 según tus filtros:
+  - Palabras clave requeridas (40%)
+  - Palabras excluidas (20%)
+  - Salario mínimo — detecta salarios en el texto: `30.000€`, `30k-40k`, `banda salarial…` (20%)
+  - Modalidad remoto/híbrido/presencial (10%)
+  - Ubicación (10%)
+
+  Los criterios que la oferta no menciona no puntúan ni penalizan. Desde el resultado puedes registrar la candidatura con un clic.
+- **⚙️ Filtros** — configura tus criterios una vez y reutilízalos en todas las validaciones.
+
+## Stack
+
+Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · SQLite (better-sqlite3)
+
+Los datos viven en `data/autojob.db` y los CVs en `data/cvs/` (carpeta ignorada por git).
+
+## Uso
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Producción local
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm start
+```

@@ -20,6 +20,9 @@
 # production
 /build
 
+# datos locales (base de datos y CVs subidos — nunca al repo)
+/data/
+
 # misc
 .DS_Store
 *.pem

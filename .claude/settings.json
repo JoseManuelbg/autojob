@@ -3,7 +3,23 @@
     "allow": [
       "PowerShell(node --version)",
       "PowerShell(npm --version)",
-      "PowerShell(gh --version)"
+      "PowerShell(gh --version)",
+      "PowerShell(npm install)",
+      "PowerShell(npm install better-sqlite3)",
+      "PowerShell(npm install --save-dev @types/better-sqlite3)",
+      "PowerShell(npm run build)",
+      "PowerShell(npm start)",
+      "Bash(curl -s -X PUT http://localhost:3000/api/filtros -H \"Content-Type: application/json\" -d '{\"palabras_clave\":\"react, typescript, frontend\",\"palabras_excluidas\":\"comercial, guardias\",\"salario_minimo\":28000,\"ubicaciones\":\"Sevilla, Madrid\",\"modalidades\":\"remoto,hibrido\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/validar -H \"Content-Type: application/json\" -d '{\"texto\":\"Buscamos desarrollador Frontend con React y TypeScript para equipo en Madrid. Trabajo 100% remoto. Banda salarial 30.000 - 38.000 euros brutos anuales. Se valora experiencia con Next.js.\"}')",
+      "Bash(curl -s -X POST http://localhost:3000/api/validar -H \"Content-Type: application/json\" -d '{\"texto\":\"Se busca comercial para venta de software PHP en oficina de Bilbao, jornada presencial, salario 18.000 euros, con guardias rotativas los fines de semana.\"}')",
+      "Bash(printf 'CV de prueba')",
+      "Bash(curl -s -X POST http://localhost:3000/api/cvs -F \"archivo=@/tmp/cvtest.pdf\" -F \"nombre=CV Prueba\" -F \"etiquetas=test\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/candidaturas -H \"Content-Type: application/json\" -d '{\"empresa\":\"ACME\",\"puesto\":\"Frontend Dev\",\"estado\":\"enviada\",\"cv_id\":1,\"puntuacion\":100}')",
+      "Bash(curl -s http://localhost:3000/api/candidaturas)",
+      "Bash(curl -s -X DELETE http://localhost:3000/api/candidaturas/1)",
+      "Bash(curl -s -X DELETE http://localhost:3000/api/cvs/1)",
+      "Bash(curl -s -X PUT http://localhost:3000/api/filtros -H \"Content-Type: application/json\" -d '{\"palabras_clave\":\"\",\"palabras_excluidas\":\"\",\"salario_minimo\":null,\"ubicaciones\":\"\",\"modalidades\":\"\"}')",
+      "PowerShell(git add -A)"
     ]
   }
 }
