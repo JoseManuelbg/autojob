@@ -14,6 +14,31 @@ function separarLista(csv: string): string[] {
     .filter(Boolean);
 }
 
+/** Versión compacta: sin espacios ni guiones, para que "frontend",
+ *  "front-end" y "front end" cuenten como lo mismo. */
+function compactar(texto: string): string {
+  return normalizar(texto).replace(/[-\s]/g, "");
+}
+
+/** ¿Aparece el término en el texto? Coincidencia normalizada y flexible
+ *  con guiones/espacios. */
+function contiene(texto: string, termino: string): boolean {
+  return (
+    normalizar(texto).includes(normalizar(termino)) ||
+    compactar(texto).includes(compactar(termino))
+  );
+}
+
+/** Un término puede ser un grupo de sinónimos separado por "|":
+ *  "junior|sin experiencia|trainee" cuenta si aparece cualquiera. */
+function contieneAlguno(texto: string, grupo: string): boolean {
+  return grupo
+    .split("|")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .some((alternativa) => contiene(texto, alternativa));
+}
+
 /** Convierte "30.000", "30k", "30,5k" o "30000" en un número de euros anuales. */
 function parsearCantidad(bruto: string): number {
   const esK = /k/i.test(bruto);
@@ -69,13 +94,14 @@ export function detectarModalidad(texto: string): string | null {
 }
 
 export function evaluarOferta(textoOferta: string, filtros: Filtros): MatchResultado {
-  const texto = normalizar(textoOferta);
   const checks: MatchCheck[] = [];
 
   // 1. Palabras clave requeridas (peso 40)
   const claves = separarLista(filtros.palabras_clave);
   if (claves.length > 0) {
-    const encontradas = claves.filter((k) => texto.includes(normalizar(k)));
+    const encontradas = claves
+      .filter((k) => contieneAlguno(textoOferta, k))
+      .map((k) => k.split("|")[0].trim());
     const ratio = encontradas.length / claves.length;
     checks.push({
       criterio: "Palabras clave",
@@ -91,7 +117,7 @@ export function evaluarOferta(textoOferta: string, filtros: Filtros): MatchResul
   // 2. Palabras excluidas (peso 20, penaliza)
   const excluidas = separarLista(filtros.palabras_excluidas);
   if (excluidas.length > 0) {
-    const presentes = excluidas.filter((k) => texto.includes(normalizar(k)));
+    const presentes = excluidas.filter((k) => contieneAlguno(textoOferta, k));
     checks.push({
       criterio: "Palabras excluidas",
       estado: presentes.length === 0 ? "ok" : "fallo",
@@ -161,7 +187,7 @@ export function evaluarOferta(textoOferta: string, filtros: Filtros): MatchResul
   const ubicaciones = separarLista(filtros.ubicaciones);
   if (ubicaciones.length > 0) {
     const remotoOk = modalidadDetectada === "remoto";
-    const coincide = ubicaciones.find((u) => texto.includes(normalizar(u)));
+    const coincide = ubicaciones.find((u) => contiene(textoOferta, u));
     checks.push({
       criterio: "Ubicación",
       estado: coincide || remotoOk ? "ok" : "desconocido",

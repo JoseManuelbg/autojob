@@ -35,7 +35,9 @@
       "Bash(curl -s -X POST http://localhost:3000/api/ofertas/buscar --max-time 60)",
       "Bash(curl -s http://localhost:3000/api/ofertas)",
       "Bash(node -e ' *)",
-      "PowerShell(git push)"
+      "PowerShell(git push)",
+      "PowerShell(gh auth setup-git)",
+      "Bash(npx tsx -e ' *)"
     ],
     "additionalDirectories": [
       "\\tmp"

@@ -80,10 +80,15 @@ export default function PaginaFiltros() {
           </label>
           <textarea
             className="input w-full h-20"
-            placeholder="Separadas por comas: react, typescript, frontend, junior…"
+            placeholder="Separadas por comas. Agrupa sinónimos con |: junior|sin experiencia|trainee, angular|react, css|maquetación"
             value={filtros.palabras_clave}
             onChange={(e) => set("palabras_clave", e.target.value)}
           />
+          <p className="text-xs text-zinc-500 mt-1.5">
+            La nota es proporcional a cuántas encuentre, así que usa pocas claves y agrupa los
+            sinónimos con <code className="bg-zinc-800 px-1 rounded">|</code> — el grupo cuenta si
+            aparece cualquiera de ellos. «frontend», «front-end» y «front end» cuentan como lo mismo.
+          </p>
         </div>
 
         <div>
@@ -92,10 +97,15 @@ export default function PaginaFiltros() {
           </label>
           <textarea
             className="input w-full h-20"
-            placeholder="Separadas por comas: comercial, autónomo, guardias, php…"
+            placeholder="Separadas por comas: senior, lead, comercial, autónomo…"
             value={filtros.palabras_excluidas}
             onChange={(e) => set("palabras_excluidas", e.target.value)}
           />
+          <p className="text-xs text-zinc-500 mt-1.5">
+            Busca el texto literal: mejor palabras que aparecen tal cual («senior», «5 años») que
+            frases («experiencia requerida» casi nunca se escribe así). Si aparece alguna, la oferta
+            pierde estos 20 puntos, pero no se descarta sola.
+          </p>
         </div>
 
         <div className="grid sm:grid-cols-2 gap-4">

@@ -26,10 +26,11 @@ export async function buscarRemoteOk(consulta: string): Promise<ResultadoFuente>
       (j: RemoteOkJob) => j.id && j.position
     );
 
-    const terminos = consulta
-      .toLowerCase()
-      .split(/[\s,]+/)
-      .filter(Boolean);
+    // Se ignoran términos muy cortos ("end", "de"...) que coinciden con
+    // cualquier palabra inglesa, salvo que todos lo sean
+    const todos = consulta.toLowerCase().split(/[\s,]+/).filter(Boolean);
+    const largos = todos.filter((t) => t.length >= 4);
+    const terminos = largos.length > 0 ? largos : todos;
 
     const ofertas: OfertaExterna[] = trabajos
       .filter((j) => {
