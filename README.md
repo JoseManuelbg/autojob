@@ -1,5 +1,7 @@
 # AutoJob 🎯
 
+> **EN:** Local job-search tracker and offer scorer. Pulls offers from LinkedIn (public guest listing), Tecnoempleo, Remotive, RemoteOK and Arbeitnow (plus InfoJobs, Adzuna and Jooble with free API keys), scores each one 0–100 against your own filters (keywords, salary parsing, remote/hybrid, location), and tracks every application with the CV version you sent. Next.js 16 · React 19 · TypeScript · Tailwind 4 · SQLite. Everything runs and stays on your machine: no accounts, no external services, it never applies on your behalf. Docs below are in Spanish.
+
 Aplicación web local para llevar el registro de tus candidaturas de empleo, gestionar tus versiones de CV y validar automáticamente si una oferta encaja con tus criterios — **100% gratuita y sin servicios externos**: todo se guarda y analiza en tu ordenador.
 
 ## Funcionalidades
